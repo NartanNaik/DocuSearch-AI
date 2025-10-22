@@ -1,4 +1,33 @@
-High-Performance Algorithm & Data Structure Library
-This repository serves as my personal portfolio of optimized solutions to common and advanced algorithmic problems encountered on platforms like LeetCode and Codeforces. The solutions are implemented in C++ and Python with a strong focus on achieving optimal time and space complexity.
+# High-Performance Algorithm & Data Structure Library
 
-Each solution is documented to explain the underlying logic and complexity analysis, demonstrating a deep, practical understanding of core computer science principles. This collection is a living project, continuously updated as part of my preparation for a career in software engineering.
+[![C++](https://img.shields.io/badge/Language-C++-00599C?logo=c%2B%2B)](https://isocpp.org/)  
+[![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python)](https://www.python.org/)  
+[![LeetCode](https://img.shields.io/badge/LeetCode-Problem%20Solving-F79F1F?logo=leetcode)](https://leetcode.com/)  
+[![Codeforces](https://img.shields.io/badge/Codeforces-Competitive%20Programming-1F8ACB?logo=codeforces)](https://codeforces.com/)  
+
+---
+
+## Overview
+
+This repository is my **personal portfolio of optimized algorithm and data structure solutions**. It focuses on solving both common and advanced problems with **high efficiency** in **C++** and **Python**.  
+
+Each solution is carefully **documented** to explain the logic, approach, and **complexity analysis**, demonstrating a strong practical understanding of computer science principles.  
+
+This collection is continuously updated as part of my preparation for a career in **software engineering**.
+
+---
+
+## Features
+
+- High-performance implementations for **algorithms & data structures**.
+- Solutions in **C++** and **Python**.
+- Well-documented code with:
+  - Clear **logic explanations**
+  - Step-by-step approach
+  - **Time and space complexity analysis**
+- Suitable for **competitive programming**, **interviews**, and **personal growth**.
+
+---
+
+## Repository Structure
+
