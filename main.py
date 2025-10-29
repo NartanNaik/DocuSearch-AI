@@ -1,7 +1,13 @@
 import cv2
-import os # To check if file exists
+import os
+import pytesseract # Import the pytesseract library
 
-IMAGE_PATH = "image.webp"
+# --- IMPORTANT: CONFIGURE TESSERACT PATH ---
+# If we didn't add Tesseract to our system PATH, we MUST tell pytesseract where to find it.
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' # Example path
+
+
+IMAGE_PATH = "image.webp" # Or sample_doc.png, whatever we test image is
 
 # --- Step 1: Load the Image ---
 if os.path.exists(IMAGE_PATH):
@@ -10,37 +16,47 @@ if os.path.exists(IMAGE_PATH):
 
     if image_color is not None:
         print("Color image loaded successfully!")
-        height, width, channels = image_color.shape
-        print(f"Color Image dimensions: Width={width}, Height={height}")
+        # ... (dimensions print)
 
         # --- Step 2: Convert to Grayscale ---
         print("Converting image to grayscale...")
         image_gray = cv2.cvtColor(image_color, cv2.COLOR_BGR2GRAY)
         print("Grayscale conversion successful!")
-        gray_height, gray_width = image_gray.shape
-        print(f"Grayscale Image dimensions: Width={gray_width}, Height={gray_height}")
+        # ... (dimensions print)
 
-        # --- Step 3: Apply Thresholding (Convert to Black & White) ---
+        # --- Step 3: Apply Thresholding ---
         print("Applying thresholding...")
-
         ret, image_thresh = cv2.threshold(image_gray, 127, 255, cv2.THRESH_BINARY)
-        # 'ret' is the threshold value used (we don't need it here)
-        # 'image_thresh' is the resulting black and white image
 
-        if ret: # Check if thresholding was successful (ret is usually the threshold value)
+        if ret:
              print("Thresholding successful!")
-             thresh_height, thresh_width = image_thresh.shape
-             print(f"Thresholded Image dimensions: Width={thresh_width}, Height={thresh_height}")
+             # ... (dimensions print)
 
-             # We can optionally display the thresholded image now:
-             # cv2.imshow("Thresholded Document", image_thresh)
-             # cv2.waitKey(0)
-             # cv2.destroyAllWindows()
+             print("Image pre-processing complete.")
 
-             # TODO: Next step - Integrate Tesseract OCR using the thresholded image
+             # --- Step 4: Perform OCR with Tesseract ---
+             print("Performing OCR...")
+             try:
+                 # Use pytesseract to extract text from the thresholded image
+                 extracted_text = pytesseract.image_to_string(image_thresh)
+
+                 print("\n--- Extracted Text ---")
+                 print(extracted_text)
+                 print("--- End of Text ---\n")
+                 print("OCR successful!")
+
+                 # TODO: Next step - Store the extracted_text (e.g., in MongoDB)
+                 # TODO: Next step - Build basic frontend for keyword search
+
+             except pytesseract.TesseractNotFoundError:
+                 print("\n--- TESSERACT ERROR ---")
+                 print("Tesseract is not installed or not in your PATH.")
+                 print("Please install Tesseract OCR engine and configure the path if needed (see code comments).")
+             except Exception as e:
+                 print(f"\nAn error occurred during OCR: {e}")
+
         else:
             print("Error during thresholding.")
-
     else:
         print(f"Error: Could not read the image file: {IMAGE_PATH}")
 else:
